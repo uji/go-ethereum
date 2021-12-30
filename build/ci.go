@@ -1128,6 +1128,7 @@ func doXCodeFramework(cmdline []string) {
 	// Ensure all dependencies are available. This is required to make
 	// gomobile bind work because it expects go.sum to contain all checksums.
 	build.MustRun(tc.Go("mod", "download"))
+	build.MustRun(tc.Go("mod", "tidy"))
 
 	// Build the iOS XCode framework
 	bind := gomobileTool("bind", "-ldflags", "-s -w", "--target", "ios", "-v", "github.com/ethereum/go-ethereum/mobile")
