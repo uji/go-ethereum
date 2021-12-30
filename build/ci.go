@@ -999,6 +999,7 @@ func doAndroidArchive(cmdline []string) {
 	// Ensure all dependencies are available. This is required to make
 	// gomobile bind work because it expects go.sum to contain all checksums.
 	build.MustRun(tc.Go("mod", "download"))
+	build.MustRun(tc.Go("mod", "tidy"))
 
 	// Build the Android archive and Maven resources
 	build.MustRun(gomobileTool("bind", "-ldflags", "-s -w", "--target", "android", "--javapkg", "org.ethereum", "-v", "github.com/ethereum/go-ethereum/mobile"))
